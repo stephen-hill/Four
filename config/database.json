@@ -1,0 +1,11 @@
+{
+    "DatabaseConnections": [
+        {
+            "Connection": {
+                "DataSourceName": "",
+                "Username": "",
+                "Password": ""
+            }
+        }
+    ]
+}
