@@ -4,12 +4,12 @@ namespace Four
 {
 	class Route
 	{
-		private $_pattern; #String
-
-		public function __construct($arguments)
+		private $Variables = array();
+		
+		public function __construct($Arguments)
 		{
 			// $arguments must be an array
-			if (is_array($arguments) === false)
+			if (is_array($Arguments) === false)
 			{
 				throw new \Exception("\$arguments must be an array.");
 			}
@@ -21,13 +21,16 @@ namespace Four
 			);
 			foreach ($requiredParameters as $parameter)
 			{
-				if (false === isset($arguments[$parameter]) && empty($arguments[$parameter]))
+				if (false === isset($Arguments[$parameter]) && empty($Arguments[$parameter]))
 				{
 					throw new \Exception("{$parameter} not specified.");
 				}
 			}
 
-
+			// Find variables in the pattern
+			preg_match_all('|{[A-z]+}|', $Arguments["Pattern"], $this->Variables, PREG_OFFSET_CAPTURE | PREG_PATTERN_ORDER);
+			
+			var_dump($this->Variables);
 		}
 	}
 }

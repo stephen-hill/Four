@@ -4,6 +4,9 @@ namespace Four
 {
 	class Kernel
 	{
+		// Public Fields
+		public static $Routes = array();
+
 		// Public Methods
 		public static function Boot()
 		{
