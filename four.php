@@ -1,7 +1,7 @@
 <?
 
-namespace Four;
-require_once("core/Four/Kernel.php");
+namespace Four\Core;
+require_once(__DIR__ . "/src/Four/Core/Kernel.php");
 Kernel::Boot();
 
 // This should be in a class somewhere.
@@ -14,5 +14,3 @@ $ExampleRoute = new Route(array(
 		"Id" => 0
 	)
 ));
-
-?>
