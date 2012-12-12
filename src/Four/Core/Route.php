@@ -2,16 +2,18 @@
 
 namespace Four\Core
 {
+	use ErrorException;
+	
 	class Route
 	{
-		private $Variables = array();
+		private $Paramters = array();
 		
 		public function __construct($Arguments)
 		{
 			// $arguments must be an array
 			if (is_array($Arguments) === false)
 			{
-				throw new \Exception("\$arguments must be an array.");
+				throw new ErrorException("\$arguments must be an array.");
 			}
 
 			// Check for the required parameters
@@ -23,14 +25,18 @@ namespace Four\Core
 			{
 				if (false === isset($Arguments[$parameter]) && empty($Arguments[$parameter]))
 				{
-					throw new \Exception("{$parameter} not specified.");
+					throw new ErrorException("{$parameter} not specified.");
 				}
 			}
 
-			// Find variables in the pattern
-			preg_match_all('|{[A-z]+}|', $Arguments["Pattern"], $this->Variables, PREG_OFFSET_CAPTURE | PREG_PATTERN_ORDER);
+			// Find parameters in the pattern
+			$parameters = array();
+			preg_match_all('|{[A-z]+}|', $Arguments["Pattern"], $parameters, PREG_OFFSET_CAPTURE | PREG_PATTERN_ORDER);
 			
-			var_dump($this->Variables);
+			if (count($parameters) > 0)
+			{
+				
+			}
 		}
 	}
 }

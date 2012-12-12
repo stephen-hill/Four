@@ -2,6 +2,8 @@
 
 namespace Four\Core
 {
+	use Four\Web\HttpPostedFile;
+	
 	class Kernel
 	{
 		// Constants
@@ -15,8 +17,21 @@ namespace Four\Core
 		// Public Methods
 		public static function Boot()
 		{
+			// Register the autoloader
 			require_once(__DIR__ . "/Autoload.php");
 			Autoload::Register();
+			
+			// Add the default route
+			$ExampleRoute = new Route(array(
+				"Pattern" => "/{Controller}/{Action}/{Id}",
+				"Controller" => "PageController",
+				"Namespace" => "/",
+				"Defaults" => array(
+					"Controller" => "Home",
+					"Action" => "Index",
+					"Id" => null
+				)
+			));
 		}
 	}
 }
