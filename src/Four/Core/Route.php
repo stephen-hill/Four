@@ -3,40 +3,29 @@
 namespace Four\Core
 {
 	use ErrorException;
+	use InvalidArgumentException;
 	
 	class Route
 	{
-		private $Paramters = array();
+		private $_pattern = [];
+		private $_parameters = []
 		
-		public function __construct($Arguments)
+		public function __construct(array $args)
 		{
 			// $arguments must be an array
-			if (is_array($Arguments) === false)
+			if (is_array($args) === false)
 			{
-				throw new ErrorException("\$arguments must be an array.");
+				throw new InvalidArgumentException("\$args must be an array.");
 			}
 
-			// Check for the required parameters
-			$requiredParameters = array
-			(
-				"Pattern", "Controller"
-			);
-			foreach ($requiredParameters as $parameter)
+			// Check for the Pattern key
+			if (false === isset($args["Pattern"]))
 			{
-				if (false === isset($Arguments[$parameter]) && empty($Arguments[$parameter]))
-				{
-					throw new ErrorException("{$parameter} not specified.");
-				}
+				throw new ErrorException("Pattern not specified.");
 			}
-
-			// Find parameters in the pattern
-			$parameters = array();
-			preg_match_all('|{[A-z]+}|', $Arguments["Pattern"], $parameters, PREG_OFFSET_CAPTURE | PREG_PATTERN_ORDER);
 			
-			if (count($parameters) > 0)
-			{
-				
-			}
+			// Find the parameters in the pattern
+			preg_match_all('|{[A-z]+}|', $args["Pattern"], $this->_parameters, PREG_OFFSET_CAPTURE | PREG_PATTERN_ORDER);
 		}
 	}
 }

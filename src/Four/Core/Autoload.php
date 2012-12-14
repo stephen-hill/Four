@@ -1,6 +1,6 @@
 <?php
 
-namespace Four\Core
+namespace Four\Framework
 {
 	class Autoload
 	{
