@@ -32,5 +32,7 @@ namespace Four\Framework
 			// 	)
 			// ));
 		}
+		
+		private function __construct(){}
 	}
 }
