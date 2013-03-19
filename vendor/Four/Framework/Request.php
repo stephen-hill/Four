@@ -1,6 +1,6 @@
 <?php
 
-namespace Four\Web
+namespace Four\FrameWork
 {
 	class HttpRequest
 	{

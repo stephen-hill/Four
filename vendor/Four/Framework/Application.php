@@ -2,8 +2,6 @@
 
 namespace Four\Framework
 {
-	use Four\Web\HttpRequest;
-	
 	class Application
 	{
 		public static $Routes;

@@ -1,6 +1,6 @@
 <?
 
-namespace Four\Core
+namespace Four\Framework
 {
 	use ErrorException;
 	use InvalidArgumentException;
