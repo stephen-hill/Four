@@ -6,6 +6,8 @@ namespace Four\Framework
 	{
 		public static $Routes;
 		public static $Request;
+		public static $Response;
+		public static $Cookies;
 		
 		public static function Init()
 		{
