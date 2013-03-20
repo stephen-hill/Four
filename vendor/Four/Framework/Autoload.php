@@ -2,10 +2,12 @@
 
 namespace Four\Framework
 {
+	use \Directory;
+	
 	class Autoload
 	{
 		// Static Fields
-		public static $Directory = "";
+		public static $Directories = array();
 		
 		// Static Methods
 		public static function Autoload($class)
@@ -13,18 +15,26 @@ namespace Four\Framework
 			// Replace underscores and namespace seperators with directory seperators
 			$file = str_replace("_", DIRECTORY_SEPARATOR, $class);
 			$file = str_replace("\\", DIRECTORY_SEPARATOR, $file);
-			$file = self::$Directory . DIRECTORY_SEPARATOR . $file . ".php";
 			
-			if (file_exists($file) === true)
+			foreach (self::$Directories as $dir)
 			{
-				require_once($file);
+				$script = $dir->path . DIRECTORY_SEPARATOR . $file . ".php";
+				var_dump($script);
+				
+				if (file_exists($script) === true)
+				{
+					require_once($script);
+					break;
+				}
 			}
 		}
 
-		public static function Register()
+		public static function Register(Directory $directory = null)
 		{
-			// Set the autoload search directory
-			self::$Directory = realpath(dirname(__FILE__) . '/../..');
+			if ($directory !== null)
+			{
+				self::AddDirectory($directory);
+			}
 			
 			// Register the autoloader
 			spl_autoload_register
@@ -33,6 +43,11 @@ namespace Four\Framework
 				true,
 				false
 			);
+		}
+		
+		public static function AddDirectory(Directory $directory)
+		{
+			self::$Directories[] = $directory;
 		}
 	}
 }
