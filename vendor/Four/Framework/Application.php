@@ -9,12 +9,9 @@ namespace Four\Framework
 		public static $Response;
 		public static $Cookies;
 		
-		public static function Init()
+		public function __construct($globals)
 		{
-			// Register the autoloader
-			require_once __DIR__ . "/Autoload.php";
-			Autoload::Register();
-			self::$Request = new HttpRequest($_GET, $_POST, $_FILES, $_SERVER, $_COOKIES);
+			self::$Request = new Request($_GET, $_POST, $_FILES, $_SERVER, $_COOKIES);
 			
 			// Add the default route
 			// $ExampleRoute = new Route(array(
@@ -28,7 +25,5 @@ namespace Four\Framework
 			// 	)
 			// ));
 		}
-		
-		private function __construct(){}
 	}
 }
