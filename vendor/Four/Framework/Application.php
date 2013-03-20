@@ -9,9 +9,11 @@ namespace Four\Framework
 		public static $Response;
 		public static $Cookies;
 		
-		public function __construct($globals)
+		public static function Start($globals)
 		{
-			self::$Request = new Request($_GET, $_POST, $_FILES, $_SERVER, $_COOKIES);
+			self::$Cookies = new CookieCollection($globals["_COOKIE"]);
+
+			//self::$Request = new Request($_GET, $_POST, $_FILES, $_SERVER, $_COOKIES);
 			
 			// Add the default route
 			// $ExampleRoute = new Route(array(
@@ -25,5 +27,7 @@ namespace Four\Framework
 			// 	)
 			// ));
 		}
+
+		private function __construct(){}
 	}
 }

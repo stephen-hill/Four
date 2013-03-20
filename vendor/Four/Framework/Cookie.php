@@ -17,8 +17,8 @@ namespace Four\Framework
 		
 		public function __construct($name, $value, DateTime $expires = null, $path = null, $domain = null, $secure = false, $httponly = true)
 		{
-			$this->EncryptedName = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "", $name, MCRYPT_MODE_CBC, "");
-			$this->EncryptedValue = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "", $value, MCRYPT_MODE_CBC, "");
+			//$this->EncryptedName = \mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "", $name, MCRYPT_MODE_CBC, "");
+			//$this->EncryptedValue = \mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "", $value, MCRYPT_MODE_CBC, "");
 			
 			$this->Name = $name;
 			$this->Value = $value;

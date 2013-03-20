@@ -5,13 +5,21 @@ namespace Four\Framework
 	class CookieCollection
 	{
 		private $_collection = array();
+
+		public function __construct($map = array())
+		{
+			foreach ($map as $key => $value)
+			{
+				$this->_collection = new Cookie($key, $value);
+			}
+		}
 		
-		public static function Set(Cookie $cookie)
+		public function Add(Cookie $cookie)
 		{
 			$this->_collection[$cookie->Name] = $cookie;
 		}
 		
-		public static function Get($name)
+		public function Get($name)
 		{
 			if (isset($this->_collection[$name]) === true)
 			{
@@ -20,21 +28,10 @@ namespace Four\Framework
 			
 			throw new Exception("Cookie not found.");
 		}
-		
-		public function __dustruct()
+
+		public function Remove($name)
 		{
-			foreach ($this->_collection as $cookie)
-			{
-				setcookie(
-					$cookie->EncryptedName,
-					$cookie->EncryptedValue,
-					$cookie->Expires->getTimestamp(),
-					$cookie->Path,
-					$cookie->Domain,
-					$cookie->Secure,
-					$cookie->HttpOnly
-				);
-			}
+			unset($this->_collection[$name]);
 		}
 	}
 }
