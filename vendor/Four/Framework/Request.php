@@ -2,7 +2,7 @@
 
 namespace Four\FrameWork
 {
-	class HttpRequest
+	class Request
 	{
 		public $Get;
 		public $Post;
