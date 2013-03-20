@@ -1,7 +1,13 @@
 <?
 
-namespace Four\Core;
-use Four\Web\HttpRequest;
+namespace Four\Framework;
 
-require_once __DIR__ . "/../vendor/Four/Framework/Application.php";
-Application::Init();
+require_once __DIR__ . "/../vendor/Four/Framework/Autoload.php";
+
+Autoload::Register(
+	dir(
+		realpath(__DIR__ . "/../vendor")
+	)
+);
+
+new Application($GLOBALS);
