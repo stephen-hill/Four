@@ -19,7 +19,6 @@ namespace Four\Framework
 			foreach (self::$Directories as $dir)
 			{
 				$script = $dir->path . DIRECTORY_SEPARATOR . $file . ".php";
-				var_dump($script);
 				
 				if (file_exists($script) === true)
 				{

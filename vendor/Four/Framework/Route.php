@@ -2,20 +2,26 @@
 
 namespace Four\Framework
 {
-	use ErrorException;
-	use InvalidArgumentException;
+	use \ErrorException;
+	use \InvalidArgumentException;
 	
 	class Route
 	{
 		private $_pattern = [];
 		private $_parameters = []
 		
-		public function __construct(array $args)
+		public function __construct($url, array $parameters)
 		{
-			// $arguments must be an array
-			if (is_array($args) === false)
+			// $url must be a string
+			if (is_string($url) === false)
 			{
-				throw new InvalidArgumentException("\$args must be an array.");
+				throw new InvalidArgumentException('Argument $url must be a string.');
+			}
+			
+			// $parameters must be an array
+			if (is_array($parameters) === false)
+			{
+				throw new InvalidArgumentException('Argument $parameters must be an array.');
 			}
 
 			// Check for the Pattern key

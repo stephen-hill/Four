@@ -2,32 +2,68 @@
 
 namespace Four\Framework
 {
+	use \ArrayObject;
+	
 	class Application
 	{
-		public static $Routes;
-		public static $Request;
-		public static $Response;
-		public static $Cookies;
+		private $_cookies;
+		private $_files;
+		private $_gets;
+		private $_posts;
+		private $_server;
 		
-		public static function Start($globals)
+		private $_events;
+		
+		public function __construct($cookies, $files, $gets, $posts, $server)
 		{
-			self::$Cookies = new CookieCollection($globals["_COOKIE"]);
-
-			//self::$Request = new Request($_GET, $_POST, $_FILES, $_SERVER, $_COOKIES);
+			$this->_cookies = new ArrayObject($cookies);
+			$this->_files = new ArrayObject($files);
+			$this->_gets = new ArrayObject($gets);
+			$this->_posts = new ArrayObject($posts);
+			$this->_server = new ArrayObject($server);
 			
-			// Add the default route
-			// $ExampleRoute = new Route(array(
-			// 	"Pattern" => "/{Controller}/{Action}/{Id}",
-			// 	"Controller" => "PageController",
-			// 	"Namespace" => "/",
-			// 	"Defaults" => array(
-			// 		"Controller" => "Home",
-			// 		"Action" => "Index",
-			// 		"Id" => null
-			// 	)
-			// ));
+			$this->_events = new ArrayObject();
 		}
-
-		private function __construct(){}
+		
+		public function Start()
+		{
+			Events::Fire('beforeStart');
+			
+			// 
+			
+			$this->FireEvent('afterStart');
+		}
+		
+		// Events
+		public function AddEvent($name, $function)
+		{
+			if (is_string($name) === false)
+			{
+				throw new Exception("\$name must be a string.");
+			}
+			
+			if (is_callable($function) === false)
+			{
+				throw new Exception("\$function is not callable.");
+			}
+			
+			$this->_events[] = array($name => $function);
+		}
+		
+		private function FireEvent($name)
+		{
+			if (is_string($name) === false)
+			{
+				throw new Exception("\$name must be a string.");
+			}
+			
+			foreach ($this->_events as $event)
+			{
+				if (key($event) === $name)
+				{
+					$event[$name]();
+				}
+			}
+		}
 	}
 }
