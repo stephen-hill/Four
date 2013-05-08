@@ -9,7 +9,7 @@ namespace Four\Framework
 	));
 	
 	# /user/view/stephen-hill
-	$viewUser = new Route("/user/view/{Username}");
+	$viewUser = new Route("/{Username}");
 	
 	# /user/stephen-hill
 	$user = new Route('/User/{Username}', array(
