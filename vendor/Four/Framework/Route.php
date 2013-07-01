@@ -10,7 +10,7 @@ namespace Four\Framework
 		private $_pattern = [];
 		private $_parameters = []
 		
-		public function __construct($url, array $parameters)
+		public function __construct($key, $url, array $parameters)
 		{
 			// $url must be a string
 			if (is_string($url) === false)

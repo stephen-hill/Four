@@ -3,19 +3,19 @@
 namespace Four\Framework
 {
 	# /
-	$home = new Route("/", array(
-		"Controller" => "DefaultController",
-		"Action" => "Default"
+	$home = new Route('index', '/', array(
+		'Controller' => 'DefaultController',
+		'Action' => 'Default'
 	));
 	
 	# /user/view/stephen-hill
-	$viewUser = new Route("/{Username}");
+	$viewUser = new Route('username', '/{Username}');
 	
 	# /user/stephen-hill
-	$user = new Route('/User/{Username}', array(
-		"Action" => "View"
+	$user = new Route('username', '/User/{Username}', array(
+		'Action' => 'View'
 	));
 	
 	# /blog/stephen-hill/post/123
-	$blogPost = new Route("/{Controller}/{BlogName}/{Action}/{PostID}");
+	$blogPost = new Route('blogpost', '/{Controller}/{BlogName}/{Action}/{PostID}');
 }
