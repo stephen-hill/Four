@@ -1,6 +1,0 @@
-<?php
-
-namespace Four\Framework
-{
-	
-}
